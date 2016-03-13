@@ -1,0 +1,3 @@
+[submodule "Leap-Motion-Music-Conductor"]
+	path = Leap-Motion-Music-Conductor
+	url = https://github.com/KeelyHill/Leap-Motion-Music-Conductor.git
