@@ -2,6 +2,8 @@
 <html>
 <head>
 <title>Max-HP</title>
+<script src="./bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Mate+SC" />
 <link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico'/>
 <style>
@@ -19,7 +21,7 @@
 body{
 background-color: #EE0000;
 }
-.container{
+.container-fluid{
 
 background-color: #fdfdfd;
 width: 100%;
@@ -75,30 +77,63 @@ width:250px;
   <source src="baymax.mp3" type="audio/mpeg">
 </audio>
 
-<div class="container">
-<div class="tit"><h2 id="name">Max-HP, health-care companion</h2></div>
-<div class="left left-col">
-<h1>Diagnosis</h1>
+<div class="container-fluid">
+<div class="tit text-center"><h2 class="text-center" id="name">Max-HP, health-care companion</h2></div>
+<div class="col-md-4">
+<h1 class="text-center">Diagnosis</h1>
+<hr>
 <p id="diag"></p>
 </div>
 
-<div class="mid center-col"><img id="mainimg" src="https://pbs.twimg.com/profile_images/488385378403901440/AMGOn50-.jpeg"></div>
-<div class="right right-col">
-<h1>Treatment</h1>
+<div class="col-md-4"><img id="mainimg" src="https://pbs.twimg.com/profile_images/488385378403901440/AMGOn50-.jpeg"></div>
+<div class="col-md-4">
+<h1 class="text-center">Treatment</h1>
+<hr>
 <p id="treat"></p>
 </div>
 
 
 <form id="imgSubmitForm"  >
-  <input id='url' type="text" data-type="text" value="" placeholder="http://example.com/pic.jpg">
-  <input type="submit" value="Submit">
+	<p>Select a File to Load:</p>
+    <input id="inputFileToLoad" type="file" onchange="loadImageFileAsURL();" />
+	<textarea id="textAreaFileContents" style="width:0;height:0" placeholder="http://example.com/pic.jpg"></textarea>
+	<script>
+	document.getElementById("textAreaFileContents").style.visibility = "hidden";
+	</script>
+  <script type="text/javascript">
+ 
+function loadImageFileAsURL()
+{
+    var filesSelected = document.getElementById("inputFileToLoad").files;
+    if (filesSelected.length > 0)
+    {
+        var fileToLoad = filesSelected[0];
+ 
+        var fileReader = new FileReader();
+ 
+        fileReader.onload = function(fileLoadedEvent) 
+        {
+            var textAreaFileContents = document.getElementById
+            (
+                "textAreaFileContents"
+            );
+     
+            textAreaFileContents.innerHTML = fileLoadedEvent.target.result;
+        };
+ 
+        fileReader.readAsDataURL(fileToLoad);
+    }
+}
+ 
+</script>
+<input type="submit" value="Submit">
 </form>
 
 <script>
 
 $('#imgSubmitForm').submit(function(e){
 	e.preventDefault();
-	url = document.getElementById('url');
+	url = document.getElementById('textAreaFileContents');
 
 
 	blockspring.runParsed("reverse-image-search", { "image_url": url.value}, { "api_key": "br_26929_b260f57381367bba720b02e73a0e311f9d7e42c6" }, function(res){
