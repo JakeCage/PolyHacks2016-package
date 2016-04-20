@@ -2,10 +2,12 @@
 <html>
 <head>
 <title>Max-HP</title>
+<script src="./bootstrap/js/jquery-1.12.3.js"></script>
 <script src="./bootstrap/js/bootstrap.min.js"></script>
+<script src="https://cdn.blockspring.com/blockspring.js"></script>
 <link rel="stylesheet" type="text/css" href="./bootstrap/css/bootstrap.min.css"/>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Mate+SC" />
-<link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico'/>
+<link rel='shortcut icon' type='image/x-icon' href='./favicon.ico'/>
 <style>
 .platforms {
       margin: 15px 0 0;
@@ -71,8 +73,6 @@ width:250px;
 </style>
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="https://cdn.blockspring.com/blockspring.js"></script>
 <audio autoplay>
   <source src="baymax.mp3" type="audio/mpeg">
 </audio>
@@ -93,12 +93,13 @@ width:250px;
 </div>
 
 
-<form id="imgSubmitForm"  >
+<form id="imgSubmitForm">
 	<p>Select a File to Load:</p>
     <input id="inputFileToLoad" type="file" onchange="loadImageFileAsURL();" />
-	<textarea id="textAreaFileContents" style="width:0;height:0" placeholder="http://example.com/pic.jpg"></textarea>
+	<textarea id="textAreaFileContents" style="width:100;height:5" placeholder="http://example.com/pic.jpg"></textarea>
 	<script>
-	document.getElementById("textAreaFileContents").style.visibility = "hidden";
+	//ALSO TEXTAREA ABOVE NEEDS TO BE SET BACK TO 0 WIDTH 0 HEIGHT
+	//document.getElementById("textAreaFileContents").style.visibility = "hidden"; COMMENT
 	</script>
   <script type="text/javascript">
  
@@ -120,11 +121,11 @@ function loadImageFileAsURL()
      
             textAreaFileContents.innerHTML = fileLoadedEvent.target.result;
         };
- 
+
         fileReader.readAsDataURL(fileToLoad);
     }
 }
- 
+
 </script>
 <input type="submit" value="Submit">
 </form>
